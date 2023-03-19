@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $categoryIds = Category::query()->pluck('id');
+
         return [
             'title' => $this->faker->text(20),
             'content' => $this->faker->paragraph(5, true),
+            'category_id' => $categoryIds->random(),
         ];
     }
 }

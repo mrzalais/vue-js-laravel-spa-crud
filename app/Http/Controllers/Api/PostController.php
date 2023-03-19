@@ -11,6 +11,7 @@ class PostController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return PostResource::collection(Post::query()->paginate(10));
+        $posts = Post::query()->with('category')->paginate(10);
+        return PostResource::collection($posts);
     }
 }
