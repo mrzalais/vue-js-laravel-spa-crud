@@ -51,13 +51,13 @@
                 </tr>
                 </tbody>
             </table>
-            <TailwindPagination :data="posts" @pagination-change-page="getPosts"/>
+            <TailwindPagination :data="posts" @pagination-change-page="page => getPosts(page, selectedCategory)"/>
         </div>
     </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
+import { ref, watch } from "vue";
 import usePosts from '../../Composables/posts'
 import useCategories from '../../Composables/categories'
 import { TailwindPagination } from 'laravel-vue-pagination';
@@ -72,6 +72,10 @@ import { TailwindPagination } from 'laravel-vue-pagination';
 const selectedCategory = ref('');
 const { posts, getPosts } = usePosts()
 const { categories, getCategories } = useCategories()
+
+watch(selectedCategory, (current, previous) => {
+    getPosts(1, current)
+})
 
 getPosts();
 getCategories();
