@@ -27,11 +27,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('posts.index');
 
 Route::get('/posts/create', function () {
     return Inertia::render('CreatePost');
-})->middleware(['auth', 'verified'])->name('createPost');
+})->middleware(['auth', 'verified'])->name('posts.create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
