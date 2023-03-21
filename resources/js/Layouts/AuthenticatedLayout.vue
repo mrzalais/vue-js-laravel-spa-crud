@@ -153,3 +153,13 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        currentPageTitle() {
+            return this.$route.meta.title;
+        }
+    }
+}
+</script>
