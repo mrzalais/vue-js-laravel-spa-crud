@@ -2,15 +2,27 @@ import './bootstrap';
 import '../css/app.css';
 
 import { createApp, h } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 import PostsIndex from './Components/Posts/Index.vue';
+import PostsCreate from './Components/Posts/Create.vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
+const routes = [
+    { path: '/', component: PostsIndex },
+    { path: '/createPost', component: PostsCreate },
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+});
+
 const app = createApp({});
-app.component('posts-index', PostsIndex)
+app.use(router);
 app.mount('#app');
 
 createInertiaApp({
