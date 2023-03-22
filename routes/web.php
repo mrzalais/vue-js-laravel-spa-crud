@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::get('/dashboard', function () {
 Route::get('/posts/create', function () {
     return Inertia::render('CreatePost');
 })->middleware(['auth', 'verified'])->name('posts.create');
+
+Route::post('/posts/create', [PostController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

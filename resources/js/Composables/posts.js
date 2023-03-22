@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import {useForm} from "@inertiajs/vue3";
 
 export default function usePosts() {
     const posts = ref({})
@@ -18,5 +19,15 @@ export default function usePosts() {
         posts.value = await response.json();
     }
 
-    return { posts, getPosts }
+    const post = useForm({
+        title: '',
+        content: '',
+        category_id: ''
+    });
+
+    const storePost = () => {
+        post.post(route('posts.create'));
+    };
+
+    return { posts, getPosts, post, storePost }
 }

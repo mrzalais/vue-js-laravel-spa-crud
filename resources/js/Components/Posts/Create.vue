@@ -1,34 +1,26 @@
 <template>
-    <form @submit.prevent="test">
+    <form @submit.prevent="storePost">
         <!-- Title -->
         <div>
-            <label for="post-title" class="block font-medium text-sm text-gray-700">
-                Title
-            </label>
-            <input id="post-title" type="text" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        </div>
+            <InputLabel for="name" value="Content" />
 
-        <!-- Content -->
-        <div class="mt-4">
-            <label for="post-content" class="block font-medium text-sm text-gray-700">
-                Content
-            </label>
-            <textarea id="post-content" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+            <input v-model="post.title" id="post-title" type="text" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
+        <div>
+            <InputLabel for="name" value="Content" />
 
-        <!-- Category -->
-        <div class="mt-4">
-            <label for="post-category" class="block font-medium text-sm text-gray-700">
-                Category
-            </label>
-            <select id="post-category" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <textarea v-model="post.content" id="post-content" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+        </div>
+        <div>
+            <InputLabel for="category" value="Category" />
+
+            <select v-model="post.category_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="" selected>-- Choose category --</option>
                 <option v-for="category in categories.data" :value="category.id">
                     {{ category.name }}
                 </option>
             </select>
         </div>
-
         <!-- Buttons -->
         <div class="mt-4">
             <button class="px-3 py-2 bg-blue-600 text-white rounded">Save</button>
@@ -38,8 +30,11 @@
 
 <script setup>
 import useCategories from '../../Composables/categories'
+import InputLabel from '@/Components/InputLabel.vue';
+import usePosts from "@/Composables/posts";
 
 const { categories, getCategories } = useCategories()
+const { post, storePost } = usePosts()
 
 getCategories();
 

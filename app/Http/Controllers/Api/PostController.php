@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -28,5 +31,12 @@ class PostController extends Controller
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(10);
         return PostResource::collection($posts);
+    }
+
+    public function store(StorePostRequest $request): Response
+    {
+        $post = Post::query()->create($request->validated());
+
+        return Inertia::location(route('posts.index', $post));
     }
 }
