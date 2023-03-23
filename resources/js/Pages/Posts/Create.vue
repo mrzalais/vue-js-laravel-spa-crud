@@ -1,11 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head } from "@inertiajs/vue3";
 import Create from "@/Components/Posts/Create.vue";
+
 </script>
 
 <template>
-    <Head title="Create" />
+    <Head title="Create"/>
 
     <AuthenticatedLayout>
         <template #header>
