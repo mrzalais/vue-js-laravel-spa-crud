@@ -33,8 +33,10 @@
         </div>
 
         <div class="py-4">
-            <button type="submit" class="inline-block px-4 py-3 bg-blue-500 text-white rounded">
-                Save post
+            <button :disabled="form.processing" class="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded disabled:opacity-75 disabled:cursor-not-allowed">
+                <div v-show="form.processing" class="inline-block animate-spin w-4 h-4 mr-2 border-t-2 border-t-white border-r-2 border-r-white border-b-2 border-b-white border-l-2 border-l-blue-600 rounded-full"></div>
+                <span v-if="form.processing">Processing...</span>
+                <span v-else>Save Post</span>
             </button>
             <Link :href="route('posts.index')"
                   class="ml-2 inline-block px-4 py-3 bg-gray-100 rounded">
