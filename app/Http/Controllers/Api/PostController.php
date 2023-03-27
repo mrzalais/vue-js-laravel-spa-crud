@@ -39,4 +39,11 @@ class PostController extends Controller
 
         return Inertia::location(route('posts.index', $post));
     }
+
+    public function destroy(Post $post): Response
+    {
+        $post->delete();
+
+        return Inertia::render('Posts/Index')->with('message', 'Post deleted successfully');
+    }
 }
